@@ -1,0 +1,98 @@
+﻿@model Contacts.Context.Contactdb
+@{
+    ViewBag.Title = "Index";
+    List<SelectListItem> li = new List<SelectListItem>();
+    li.Add(new SelectListItem() { Text = " Purpose of Contact" });
+    li.Add(new SelectListItem() { Text = " Arrange a Metting" });
+    li.Add(new SelectListItem() { Text = "Regarding a Placement " });
+    li.Add(new SelectListItem() { Text = "Want to buy a  prouduct for my company" });
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .error {
+            color: red;
+        }
+        .long-textbox {
+            max-width: 700px;
+        }
+        #btn{
+           width:280px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    @using (Html.BeginForm("AddContact", "Contact", FormMethod.Post))
+    {
+
+    <div class="panel panel-body">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <label>First Name</label><br />
+                        @Html.ValidationMessageFor(x => x.Fname, "", new { @class = "error" })
+                        @Html.TextBoxFor(x => x.Fname, new { placeholder = "First Name", @class = "form-control long-textbox" })
+                    </div>
+
+
+                    <div class="col-lg-7">
+                        <label>Last Name</label><br />
+                        @Html.ValidationMessageFor(x => x.Lname, "", new { @class = "error", })
+                        @Html.TextBoxFor(x => x.Lname, new { placeholder = "Last Name", @class = "form-control long-textbox" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Email</label><br />
+                        @Html.ValidationMessageFor(x => x.email, "", new { @class = "error", })
+                        @Html.TextBoxFor(x => x.email, new { placeholder = "Email Address", @class = "form-control long-textbox" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Phone no</label><br />
+                        @Html.ValidationMessageFor(x => x.phoneno, "", new { @class = "error"})
+                        @Html.TextBoxFor(x => x.phoneno, new { placeholder = "Phone no", @class = "form-control long-textbox" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label ID="lb6">Contact Purpose</label>
+                        <br />
+                        <div class="form-control long-textbox">
+                            @Html.DropDownList("Purpose of contact", li, "Purpose of Contact")
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label>Message</label>
+            @Html.ValidationMessageFor(x => x.Message,"",new {@class="error" })
+            @Html.TextAreaFor(x => x.Message, new { placeholder = "Hii there message here.....", @class = "form-control", @rows = "10", width = "500px" })
+            <button id="btn" type="submit" class="btn btn-danger">send</button>
+        </div>
+        
+    </div>
+            
+   
+    }
+</body>
+</html>
